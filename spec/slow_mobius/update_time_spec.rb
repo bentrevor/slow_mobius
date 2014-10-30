@@ -37,5 +37,9 @@ describe SlowMobius::UpdateTime do
     it 'can handle comma separated updates' do
       expect(described_class.call('1029080014', '1m,1d,1H,1M,1y')).to eq '1130090115'
     end
+
+    it 'can handle negative updates' do
+      expect(described_class.call('1029080014', '-1m,1d,-1H,1M,-1y')).to eq '0930070113'
+    end
   end
 end

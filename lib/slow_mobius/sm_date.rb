@@ -1,29 +1,31 @@
 # TODO: also a bad name, but I really don't want another Date class, even if
 # it's in my own module
 class SlowMobius::SMDate
-  attr_accessor :month, :day, :hour, :minute, :year
+  attr_accessor :date_time
 
   def initialize(timestamp)
-    self.month  = timestamp[0..1].to_i
-    self.day    = timestamp[2..3].to_i
-    self.hour   = timestamp[4..5].to_i
-    self.minute = timestamp[6..7].to_i
-    self.year   = timestamp[8..9].to_i
+    self.date_time = DateTime.strptime(timestamp, strf)
+  end
+
+  def add_months(months)
+    self.date_time = date_time >> months
+  end
+
+  def add_days(days)
+    self.date_time += days
+  end
+
+  def add_minutes(minutes)
+    self.date_time += (minutes / (24.0 * 60))
   end
 
   def to_timestamp
-    "#{pad(month)}#{pad(day)}#{pad(hour)}#{pad(minute)}#{pad(year)}"
+    date_time.strftime(strf)
   end
 
-  def pad(unit)
-    u = unit.to_s
-    case u.length
-    when 0
-      '00'
-    when 1
-      '0' + u
-    else
-      u
-    end
+  private
+
+  def strf
+    '%m%d%H%M%y'
   end
 end

@@ -19,15 +19,15 @@ module SlowMobius
 
         case unit
         when 'm'
-          date.month += delta
+          date.add_months(delta)
         when 'd'
-          date.day += delta
+          date.add_days(delta)
         when 'y'
-          date.year += delta
+          date.add_months(delta * 12)
         when 'M'
-          date.minute += delta
+          date.add_minutes(delta)
         when 'H'
-          date.hour += delta
+          date.add_minutes(delta * 60)
         end
       end
 
