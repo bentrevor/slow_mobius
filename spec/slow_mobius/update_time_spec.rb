@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe SlowMobius::UpdateTime do
+describe SlowMobius::UpdateTimestamp do
   it 'can change the time by 0' do
     expect(described_class.call('1029080014', '')).to eq '1029080014'
   end

@@ -1,17 +1,15 @@
-# TODO: need a better name for this, as this won't actually be updating the
-# system time, just figuring out the new arg to `date`
 module SlowMobius
-  class UpdateTime
-    def self.call(timestamp, update)
+  class UpdateTimestamp
+    def self.call(current_timestamp, update)
       if update =~ /\d{10}/
         update
       else
-        new_timestamp(timestamp, update)
+        new_timestamp(current_timestamp, update)
       end
     end
 
-    def self.new_timestamp(timestamp, update)
-      date = SMDate.new(timestamp)
+    def self.new_timestamp(current_timestamp, update)
+      timestamp = Timestamp.new(current_timestamp)
 
       update.split(',').each do |change|
         unit = change[-1]
@@ -19,19 +17,19 @@ module SlowMobius
 
         case unit
         when 'm'
-          date.add_months(delta)
+          timestamp.add_months(delta)
         when 'd'
-          date.add_days(delta)
+          timestamp.add_days(delta)
         when 'y'
-          date.add_months(delta * 12)
+          timestamp.add_months(delta * 12)
         when 'M'
-          date.add_minutes(delta)
+          timestamp.add_minutes(delta)
         when 'H'
-          date.add_minutes(delta * 60)
+          timestamp.add_minutes(delta * 60)
         end
       end
 
-      date.to_timestamp
+      timestamp.to_strftime
     end
   end
 end
