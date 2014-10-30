@@ -3,6 +3,7 @@ module SlowMobius
     loop do
       input = Readline.readline("\n> ", true)
       if input == 'reset'
+        raise StandardError, '`reset` is not implemented yet'
         `osascript resetClock.AppleScript`
       else
         current_timestamp = Time.now.strftime('%m%d%H%M%y')
