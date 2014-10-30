@@ -1,6 +1,6 @@
 # TODO: also a bad name, but I really don't want another Date class, even if
 # it's in my own module
-class SMDate
+class SlowMobius::SMDate
   attr_accessor :month, :day, :hour, :minute, :year
 
   def initialize(timestamp)

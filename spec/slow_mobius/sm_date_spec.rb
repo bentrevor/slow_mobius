@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe SMDate do
+describe SlowMobius::SMDate do
   let(:date) { described_class.new('1029080014') }
 
   it 'parses a timestamp' do
@@ -12,7 +12,7 @@ describe SMDate do
   end
 
   it 'can encode itself as a timestamp' do
-    date        = SMDate.new ''
+    date        = described_class.new ''
     date.month  = 10
     date.day    = 29
     date.hour   = 8

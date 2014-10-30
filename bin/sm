@@ -1,5 +1,8 @@
 #!/usr/bin/env ruby
 
+require 'readline'
+# require 'pry'
+Dir[File.expand_path("lib/*.rb")].each { |f| require f }
 Dir[File.expand_path("lib/**/*.rb")].each { |f| require f }
 
 SlowMobius.repl
