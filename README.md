@@ -5,16 +5,18 @@ system time on OSX from the command line.
 
 ## Installation
 
-Like other gems.
+Like other gems, or just run `sudo bin/repl`.
 
 ## Usage
 
-Run `sudo bin/repl` to get to a prompt.  It takes commands that look like this:
-`1m,-2d,3H,-4M,5y`.  This will change the date forward one month, backwards two
-days, etc.  You only need to specify the fields you want to change.  `reset`
-will sync the clock with the real time.
+Use at your own risk - this thing is poorly tested and hacky, and it's caused me
+to see some errors when using `sudo`.
+
+`sudo bin/repl` brings up a prompt.  It takes commands that look like this:
+`1m,-2d,3H,-4M,5y`.  This will change the date forward one month, backward two
+days, forward 3 hours, backward 4 minutes, and forward 5 years.  You only need
+to specify the fields you want to change.  `reset` will sync the clock with the
+real time. `undo` will go back to the previous time.
 
 ## Todo
-* better reset (ditch the applescript)
 * linux support
-* undo
