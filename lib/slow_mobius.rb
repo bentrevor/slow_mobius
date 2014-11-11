@@ -1,6 +1,7 @@
 module SlowMobius
   def self.repl
     previous_timestamp = nil
+    repl_start_year = Time.now.year
 
     loop do
       input = Readline.readline("\n> ", true)
@@ -15,7 +16,7 @@ module SlowMobius
         previous_timestamp = new_previous_timestamp
       else
         previous_timestamp = Time.now.strftime('%m%d%H%M%y')
-        new_timestamp = UpdateTimestamp.call(previous_timestamp, input)
+        new_timestamp = UpdateTimestamp.call(previous_timestamp, input, repl_start_year)
         `date #{new_timestamp}`
       end
     end

@@ -42,4 +42,11 @@ describe SlowMobius::UpdateTimestamp do
       expect(described_class.call('1029080014', '-1m,1d,-1H,1M,-1y')).to eq '0930070113'
     end
   end
+
+  it 'raises an error if the date is too far away from the present' do
+    # jumping to 2054 really goofed up my system - Spotify Helper and Chrome
+    # Helper each ate up 200% cpu, and a few others took 100% each.
+
+    expect { described_class.call('1029080014', '100y') }.to raise_error
+  end
 end

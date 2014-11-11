@@ -1,14 +1,26 @@
 module SlowMobius
   class UpdateTimestamp
-    def self.call(current_timestamp, update)
+    def self.call(current_timestamp, update, repl_start_year = 2014)
+      self.new(current_timestamp, update, repl_start_year).call
+    end
+
+    attr_accessor :current_timestamp, :update, :repl_start_year
+
+    def initialize(current_timestamp, update, repl_start_year)
+      self.current_timestamp = current_timestamp
+      self.update = update
+      self.repl_start_year = repl_start_year
+    end
+
+    def call
       if update =~ /\d{10}/
         update
       else
-        new_timestamp(current_timestamp, update)
+        new_timestamp
       end
     end
 
-    def self.new_timestamp(current_timestamp, update)
+    def new_timestamp
       timestamp = Timestamp.new(current_timestamp)
 
       update.split(',').each do |change|
@@ -29,7 +41,13 @@ module SlowMobius
         end
       end
 
+      raise StandardError, "tried to jump too far" if out_of_range?(timestamp)
       timestamp.to_strftime
+    end
+
+    def out_of_range?(timestamp)
+      delta = (timestamp.date_time.year - repl_start_year).abs
+      delta > 10
     end
   end
 end
