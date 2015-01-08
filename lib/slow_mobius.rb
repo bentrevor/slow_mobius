@@ -14,6 +14,8 @@ module SlowMobius
         new_previous_timestamp = Time.now.strftime('%m%d%H%M%y')
         `date #{previous_timestamp}`
         previous_timestamp = new_previous_timestamp
+      elsif input == 'exit'
+        break
       else
         previous_timestamp = Time.now.strftime('%m%d%H%M%y')
         new_timestamp = UpdateTimestamp.call(previous_timestamp, input, repl_start_year)
